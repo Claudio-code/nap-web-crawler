@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/gocolly/colly/v2"
 	"log"
 	"strings"
+
+	"github.com/gocolly/colly/v2"
 )
 
 func main() {
@@ -19,7 +20,9 @@ func main() {
 
 		errorMessage := e.Request.Visit(urlToVisit)
 		if errorMessage != nil && errorMessage.Error() != "URL already visited" {
-			errorUrls[urlToVisit] = errorMessage.Error()
+			// errorUrls[urlToVisit] = errorMessage.Error()
+			log.Println("Error Visiting ", urlToVisit)
+			log.Println("Error message ", errorMessage.Error())
 		}
 	})
 
@@ -27,7 +30,7 @@ func main() {
 		log.Println("Visiting ", r.URL)
 	})
 
-	builtin := c.Visit("https://docs.spring.io/spring-cloud-stream/docs/current/reference/html/spring-cloud-stream-binder-kafka.html")
+	builtin := c.Visit("https://docs.spring.io/spring-ldap/reference/spring-ldap-basic-usage.html")
 	if builtin != nil {
 		log.Fatal(builtin)
 	}
